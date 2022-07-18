@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>To-Do List Web App </title>
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="addTask">
+			<!-- <input type="text" placeholder="Task Name With Description "class="hel" style="width: 100%; height: 400px; margin-top: 100px;"  > -->
+
+			<textarea class="hel" rows="5" placeholder="              Add Task Name With Description  " style="margin-top:50x;"></textarea>
+					<button>Add</button>
+		</div>
+
+		<ol class="notCompleted">
+			<h3>Not Completed</h3>
+		</ol>
+
+		<ol class="Completed">
+			<h3>Completed</h3>
+		</ol>
+	</div>
+
+	<script>
+		const pp = document.querySelector('.hel');
+		const btn = document.querySelector('.addTask > button');
+		//let input = document.querySelector('.hel2');
+		btn.addEventListener('click', addList);
+		pp.addEventListener('keyup', (e) => {
+			(e.keyCode === 13 ? addList(e) : null);
+		})
+		
+		function addList(e) {
+			const notCompleted = document.querySelector('.notCompleted');
+			const Completed = document.querySelector('.Completed');
+
+			const newLi1 = document.createElement('li');
+			
+			const checkBtn = document.createElement('button');
+			const delBtn = document.createElement('button');
+
+			checkBtn.innerHTML = '<i class="fa fa-check"></i>';
+			delBtn.innerHTML = '<i class="fa fa-trash"></i>';
+			
+			if (pp.value !== '') {
+				newLi1.textContent = pp.value;
+				pp.value = '';
+				// newLi.textContent='li';
+				// newLi1.textContent='em';
+
+				
+				notCompleted.appendChild(newLi1);
+
+				newLi1.append(checkBtn);
+				newLi1.append(delBtn);
+				
+			}
+
+			checkBtn.addEventListener('click', function () {
+				const parent = this.parentNode;
+				parent.remove();
+				Completed.appendChild(parent);
+				checkBtn.style.display = 'none';
+			});
+
+			delBtn.addEventListener('click', function () {
+				const parent = this.parentNode;
+				parent.remove();
+			});
+			
+			
+		}
+
+
+	</script>
+</body>
+
+</html>
